@@ -201,9 +201,17 @@ function analyze(request) {
             if ("const" in t) {
               if (t.const !== fact.values[i]) ok = false;
             } else {
-              if (t.var in binding && binding[t.var] !== fact.values[i])
+              if (
+                Object.hasOwn(binding, t.var) &&
+                binding[t.var] !== fact.values[i]
+              )
                 ok = false;
-              binding[t.var] = fact.values[i];
+              Object.defineProperty(binding, t.var, {
+                value: fact.values[i],
+                enumerable: true,
+                writable: true,
+                configurable: true,
+              });
             }
           });
           if (ok) after.push({ binding, tokens: [...p.tokens, fact.id] });
