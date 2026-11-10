@@ -193,7 +193,7 @@ test(
         });
         fs.mkdirSync(process.env.SCREENSHOT_DIR, { recursive: true });
         fs.writeFileSync(
-          path.join(process.env.SCREENSHOT_DIR, name + ".png"),
+          path.join(process.env.SCREENSHOT_DIR, "chase-" + name + ".png"),
           Buffer.from(image.data, "base64"),
         );
       }
