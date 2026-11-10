@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Exact bounded conjunctive-query containment, reverse homomorphisms, canonical counterexamples and set-only minimization."
+    />
+    <title>ProvLab - the rewrite has to work everywhere</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="containment.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="wordmark" href="index.html">PROV<span>LAB</span></a
+        ><span class="tag">QUERY REWRITES / SET SEMANTICS</span>
+      </header>
+      <section class="hero">
+        <p class="eyebrow">02 / SYMBOLIC QUERY REASONING</p>
+        <h1>Same answers.<br />Every <i>database?</i></h1>
+        <p class="lead">
+          A rewrite is more than a match on one input. Find the
+          <strong>reverse map</strong> that proves containment, or freeze a tiny
+          database that disproves it.
+        </p>
+        <p class="scope">
+          Finite positive CQs · fixed constants · ordered output positions
+        </p>
+      </section>
+      <section class="workbench">
+        <div class="bench-head">
+          <div>
+            <p class="eyebrow">01 / PUT THE REWRITE ON TRIAL</p>
+            <h2>Two queries. Both directions.</h2>
+          </div>
+          <label
+            >Control<select
+              id="control"
+              aria-label="Comparison control"
+            ></select
+          ></label>
+        </div>
+        <p id="why" class="why"></p>
+        <div class="split">
+          <div class="query-box">
+            <span class="eyebrow">LEFT QUERY</span>
+            <pre id="left-query"></pre>
+          </div>
+          <div class="query-box">
+            <span class="eyebrow">RIGHT QUERY</span>
+            <pre id="right-query"></pre>
+          </div>
+        </div>
+        <details id="editor">
+          <summary>Edit the bounded query pair</summary>
+          <label for="input">Strict JSON request</label
+          ><textarea id="input" spellcheck="false"></textarea
+          ><button id="run">Compare all finite databases</button>
+          <p class="small">
+            Single CQs,1..4 atoms each, up to4 variables and2 literal constants.
+            The finite syntax is bounded; the theorem covers every finite
+            database under set semantics.
+          </p>
+        </details>
+        <p id="status" role="status"></p>
+      </section>
+      <section id="results" aria-live="polite"></section>
+      <section class="method">
+        <p class="eyebrow">05 / SCOPE THE CLAIM</p>
+        <h2>A proof of set answers. Not a bag rewrite.</h2>
+        <div class="method-grid">
+          <div>
+            <h3>One theorem. Two kinds of evidence.</h3>
+            <p>
+              Left ⊆ right means a head-preserving homomorphism
+              <strong>right → left</strong>. It fixes constants and maps every
+              source atom to a target atom. A missing map is witnessed by the
+              target query's canonical database, with distinct frozen values for
+              its variables.
+            </p>
+            <p>
+              The minimization atlas enumerates all nonempty atom subsets,
+              rejects lost output variables, and tests a map from the full query
+              to each safe subset. The smallest equivalent subsets are minimum
+              CQs in this contract.
+            </p>
+            <p>
+              Natural provenance and bag probes use canonical facts f0,f1,...
+              and multiplicity2 per base fact. These are concrete contrasts, not
+              tests deciding bag equivalence.
+            </p>
+          </div>
+          <div>
+            <h3>Reproduce the evidence</h3>
+            <pre>
+provlab-containment pair.json --output report.json
+provlab-containment report.json --verify</pre>
+            <p>
+              The installed checker independently grounds both queries over the
+              canonical databases. Actual SQLite DISTINCT/ALL and token-carrying
+              joins, plus SymPy, check the finite reference cases.
+            </p>
+            <p>
+              <a href="https://github.com/midya8/provlab"
+                >Source &amp; reproduction</a
+              >
+              ·
+              <a
+                href="https://github.com/midya8/provlab/blob/main/CONTAINMENT.md"
+                >Method &amp; limits</a
+              >
+              · <a href="index.html">Data provenance lab</a>
+            </p>
+          </div>
+        </div>
+        <details>
+          <summary>Exact contract and limits</summary>
+          <ul id="limits"></ul>
+        </details>
+        <h3>Primary and reference reading</h3>
+        <p class="small">
+          <a href="https://www.cs.ubc.ca/~laks/cpsc504/chandra-merlin-1977.pdf"
+            >Chandra &amp; Merlin,1977</a
+          >
+          ·
+          <a href="https://pages.cs.wisc.edu/~paris/lecture-notes/lecture2.pdf"
+            >Koutris: containment and minimization</a
+          >
+          ·
+          <a href="https://berkeley-cs294-248.github.io/lectures/unit2.pdf"
+            >Suciu: cores and bag limits</a
+          >
+          ·
+          <a
+            href="https://iccl.inf.tu-dresden.de/w/images/7/7d/FDQLSS15-lecture-08.pdf"
+            >Krötzsch: fixed constants and heads</a
+          >
+          ·
+          <a
+            href="https://northeastern-datalab.github.io/cs7240/sp20/download/cs7240-L9-Equivalence.pdf"
+            >Northeastern: reverse maps</a
+          >
+          ·
+          <a href="https://sqlite.org/lang%5Fselect.html"
+            >SQLite SELECT semantics</a
+          >
+        </p>
+      </section>
+      <footer>
+        Original MIT implementation · classical query-containment theory · no
+        private data or paid APIs
+      </footer>
+    </main>
+    <script type="module" src="containment-app.js"></script>
+  </body>
+</html>
