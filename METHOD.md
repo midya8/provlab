@@ -36,7 +36,7 @@ The optional reference compiles the bounded AST to actual SQLite `SELECT ... FRO
 
 The default example has `p²+pq`, bag10, exact presence1/2 and invalid arithmetic contrast3/8. Its all-witness supports are `{p}` and `{p,q}`; its only minimal Boolean witness is `{p}`.
 
-Native tests cover20 test methods,64 exhaustive binary-relation/query-pattern cases on two values,150 stable seeded positive queries, direct full-instance world re-querying, probability and multiplicity grids, six-token/64-world instances and shape/type rejection. Every one of the default certificate's93 non-input primitive fields is changed once and rejected. This mutation count excludes supplied input: a self-consistent certificate for a different valid input can be legitimate. Missing/extra fields and bool-as-int forgeries are separately rejected.
+Native tests cover21 test methods,64 exhaustive binary-relation/query-pattern cases on two values,150 stable seeded positive queries, direct full-instance world re-querying, probability and multiplicity grids, six-token/64-world instances and shape/type rejection. Every one of the default certificate's93 non-input primitive fields is changed once and rejected. This mutation count excludes supplied input: a self-consistent certificate for a different valid input can be legitimate. Missing/extra fields and bool-as-int forgeries are separately rejected.
 
 Optional SQLite/SymPy checks cover164 requests (14 controls plus150 seeded),3062 possible-database SQL queries,164 bag SQL queries and233 polynomial outputs. They also execute ordinary full-instance and token-carrying queries, which are not included in the3062 world-query count. The pinned SymPy version is1.14.0; SQLite's version varies with the Python build and is printed at runtime.
 
