@@ -305,6 +305,10 @@ test(
               eventsEnabled: true,
             });
             const previous = new Set(downloads.keys());
+            await call("Page.bringToFront");
+            await js(
+              'window.lastDownloadClick=null;document.getElementById("download").addEventListener("click",e=>{window.lastDownloadClick={trusted:e.isTrusted,active:navigator.userActivation.isActive}}, {once:true})',
+            );
             await js(
               'document.getElementById("download").scrollIntoView({block:"center"});new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))',
             );
@@ -325,6 +329,11 @@ test(
                 button: "left",
                 clickCount: 1,
               });
+            assert.deepEqual(
+              await js("window.lastDownloadClick"),
+              { trusted: true, active: true },
+              "trusted download click for control " + ci,
+            );
             let item;
             for (let k = 0; k < 800; k++) {
               item = Array.from(downloads.values()).find(
@@ -334,7 +343,10 @@ test(
                 break;
               await delay(25);
             }
-            assert.ok(item);
+            assert.ok(
+              item,
+              "completed native download event required for control " + ci,
+            );
             assert.equal(item.state, "completed");
             assert.equal(item.suggestedFilename, "provlab-certificate.json");
             const file = path.join(dir, item.guid);
@@ -371,8 +383,10 @@ test(
         await js('document.getElementById("run").click()');
         assert.equal(await js("window.provReport"), null);
         assert.equal(
-          await js('document.getElementById("download").disabled'),
-          true,
+          await js(
+            'document.getElementById("download").getAttribute("aria-disabled")',
+          ),
+          "true",
         );
         assert.equal(await text("results"), "");
         assert.match(await text("status"), /^Rejected:/);
