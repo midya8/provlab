@@ -475,3 +475,21 @@ svg {
     width: 100%;
   }
 }
+
+#download {
+  display: inline-block;
+  padding: 12px 16px;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  font: 13px system-ui;
+  text-decoration: none;
+  cursor: pointer;
+}
+#download[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+#download:hover {
+  background: var(--green);
+}
