@@ -158,3 +158,8 @@ select {
   margin: 0;
   border: 0;
 }
+
+.direction-tabs button {
+  background: var(--paper);
+  color: var(--ink);
+}
