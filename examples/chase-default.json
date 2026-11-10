@@ -1,0 +1,149 @@
+{
+  "schema": [
+    {
+      "name": "R",
+      "arity": 2
+    },
+    {
+      "name": "S",
+      "arity": 2
+    }
+  ],
+  "left": {
+    "head": [
+      "x",
+      "y"
+    ],
+    "body": [
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "k"
+          },
+          {
+            "var": "x"
+          }
+        ]
+      },
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "k"
+          },
+          {
+            "var": "y"
+          }
+        ]
+      }
+    ]
+  },
+  "right": {
+    "head": [
+      "u",
+      "v"
+    ],
+    "body": [
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "t"
+          },
+          {
+            "var": "u"
+          }
+        ]
+      },
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "t"
+          },
+          {
+            "var": "v"
+          }
+        ]
+      },
+      {
+        "relation": "S",
+        "terms": [
+          {
+            "var": "u"
+          },
+          {
+            "var": "v"
+          }
+        ]
+      }
+    ]
+  },
+  "dependencies": [
+    {
+      "name": "one_value",
+      "kind": "key",
+      "relation": "R",
+      "positions": [
+        0
+      ]
+    },
+    {
+      "name": "diagonal",
+      "kind": "full",
+      "body": [
+        {
+          "relation": "R",
+          "terms": [
+            {
+              "var": "t"
+            },
+            {
+              "var": "u"
+            }
+          ]
+        }
+      ],
+      "head": {
+        "relation": "S",
+        "terms": [
+          {
+            "var": "u"
+          },
+          {
+            "var": "u"
+          }
+        ]
+      }
+    },
+    {
+      "name": "symmetry",
+      "kind": "full",
+      "body": [
+        {
+          "relation": "S",
+          "terms": [
+            {
+              "var": "u"
+            },
+            {
+              "var": "v"
+            }
+          ]
+        }
+      ],
+      "head": {
+        "relation": "S",
+        "terms": [
+          {
+            "var": "v"
+          },
+          {
+            "var": "u"
+          }
+        ]
+      }
+    }
+  ]
+}
