@@ -8,6 +8,7 @@ const $ = (id) => document.getElementById(id),
   },
   set = (x) => "{" + x.join(", ") + "}",
   tuple = (x) => "(" + x.join(", ") + ")";
+let certificateURL = null;
 let controls,
   report = null,
   chosen = 0,
@@ -379,7 +380,14 @@ function run() {
     worldMask = 0;
     renderInput();
     renderOutput();
-    $("download").disabled = false;
+    if (certificateURL) URL.revokeObjectURL(certificateURL);
+    certificateURL = URL.createObjectURL(
+      new Blob([JSON.stringify(report, null, 2) + "\n"], {
+        type: "application/json",
+      }),
+    );
+    $("download").href = certificateURL;
+    $("download").setAttribute("aria-disabled", "false");
     $("status").textContent =
       "Exact finite replay ready · " +
       report.derivations.length +
@@ -392,7 +400,10 @@ function run() {
     $("results").replaceChildren();
     $("facts").querySelector("tbody").replaceChildren();
     $("query").textContent = "";
-    $("download").disabled = true;
+    if (certificateURL) URL.revokeObjectURL(certificateURL);
+    certificateURL = null;
+    $("download").removeAttribute("href");
+    $("download").setAttribute("aria-disabled", "true");
     $("status").textContent = "Rejected: " + e.message;
   }
 }
@@ -404,21 +415,7 @@ function load() {
 }
 $("run").onclick = run;
 $("control").onchange = load;
-$("download").onclick = () => {
-  if (!report) return;
-  const url = URL.createObjectURL(
-    new Blob([JSON.stringify(report, null, 2) + "\n"], {
-      type: "application/json",
-    }),
-  );
-  const a = el("a");
-  a.href = url;
-  a.download = "provlab-certificate.json";
-  document.body.append(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-};
+
 try {
   controls = await (await fetch("controls.json")).json();
   controls.forEach((c, i) => {
