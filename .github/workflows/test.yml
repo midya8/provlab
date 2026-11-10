@@ -16,6 +16,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m unittest discover -s tests -v
       - run: bash tools/check_wheel.sh
+      - run: bash tools/check_containment_wheel.sh
   browser:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs
+      - run: node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs tests/test_containment_engine.mjs tests/test_containment_browser.cjs
   external-reference:
     runs-on: ubuntu-latest
     steps:
@@ -36,3 +37,4 @@ jobs:
           python-version: "3.13"
       - run: python -m pip install -r requirements-reference.txt
       - run: python tools/reference.py
+      - run: python tools/containment_reference.py

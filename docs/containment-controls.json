@@ -1,0 +1,686 @@
+[
+  {
+    "name": "Repeated evidence",
+    "why": "Set-equivalent is not bag-equivalent. Reusing one fact squares its multiplicity and token power.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Independent witness folds",
+    "why": "Two existential neighbors can use the same fact under set semantics. The fold merges variables, not output positions.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Longer path is stricter",
+    "why": "A three-edge path implies a two-edge prefix. The reverse mapping direction is the point.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "y"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "z"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "v"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Cycle versus path",
+    "why": "A directed triangle and a two-edge path are not equivalent. Inspect the failing direction and frozen counterexample.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "y"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "z"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "v"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Output order is binding",
+    "why": "Body shape alone is not enough. Swapping the two distinguished output positions changes the query.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["v", "u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "A fixed literal",
+    "why": "The literal a is not a fresh variable. A required a-neighbor is stricter than any neighbor.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Different literals",
+    "why": "Constants stay fixed even when a second literal is absent from the canonical facts.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "const": "b"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Boolean head",
+    "why": "An empty ordered head asks only whether the pattern exists. A loop can witness both edges of a two-cycle.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "v"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Nontrivial minimum",
+    "why": "A separate edge can fold into an existing length-two path. The complete atom-subset atlas exposes exactly which edge can be removed.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "z"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "v"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Relation names matter",
+    "why": "The same edge shape does not let R satisfy an S atom.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Ground Boolean atom",
+    "why": "A constant-only body has no variables to guess. The empty mapping is a genuine candidate.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Ternary projection",
+    "why": "Projection and repeated positions are enforced on arity-three atoms too.",
+    "input": {
+      "schema": [
+        {
+          "name": "T",
+          "arity": 3
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "T",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "T",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "z"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "T",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

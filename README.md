@@ -63,3 +63,9 @@ CI runs native tests and installed-wheel checks on Python3.10/3.11/3.12/3.13, ac
 ## Attribution
 
 Original project code and tiny fixtures under MIT. Classical semantics are credited in [METHOD.md](METHOD.md). CLI, installed-wheel and Chrome/CDP scaffolding adapt this portfolio's earlier BranchLab work; the strict browser JSON parser came through BranchLab from AbsorbLab. No external solver code or paper figures are copied. SymPy is an optional pinned development dependency, not vendored. Python's SQLite binding uses its bundled/system SQLite implementation. No paid service, private dataset, benchmark claim, invented contributor or model-training claim.
+
+## 0.2: same answers on every database?
+
+[Live containment lab](https://midya8.github.io/provlab/containment.html) · [Exact contract and reproduction](CONTAINMENT.md)
+
+Compare safe single conjunctive queries in both directions with reverse homomorphisms, full canonical counterexamples, and every atom-subset minimum. Set equivalence is explicitly contrasted with bag counts and natural provenance. The0.1 data-provenance engine remains separate. See the method for exact bounds, classical sources and finite reference checks.

@@ -1,0 +1,55 @@
+{
+  "schema": [
+    {
+      "name": "R",
+      "arity": 2
+    }
+  ],
+  "left": {
+    "head": [
+      "x"
+    ],
+    "body": [
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "x"
+          },
+          {
+            "var": "y"
+          }
+        ]
+      },
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "x"
+          },
+          {
+            "var": "y"
+          }
+        ]
+      }
+    ]
+  },
+  "right": {
+    "head": [
+      "u"
+    ],
+    "body": [
+      {
+        "relation": "R",
+        "terms": [
+          {
+            "var": "u"
+          },
+          {
+            "var": "v"
+          }
+        ]
+      }
+    ]
+  }
+}
