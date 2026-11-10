@@ -192,6 +192,7 @@ test(
           Buffer.from(image.data, "base64"),
         );
       }
+      let lastDownloadGesture = -Infinity;
       const counts = {
         reports: 0,
         outputs: 0,
@@ -322,6 +323,14 @@ test(
               true,
               "download center must be the visible hit target",
             );
+            // Respect Chromium's renderer download-rate guard instead of
+            // racing14 controls through a single renderer in under one second.
+            // Source: chromium/src commit4d44d2be0eb693d9b477b476072011cc3b852a78.
+            // This is deliberate request pacing, not an assertion retry.
+            await delay(
+              Math.max(0, 250 - (performance.now() - lastDownloadGesture)),
+            );
+            lastDownloadGesture = performance.now();
             for (const type of ["mousePressed", "mouseReleased"])
               await call("Input.dispatchMouseEvent", {
                 type,
