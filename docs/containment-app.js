@@ -289,7 +289,9 @@ function renderAtlas(side) {
       side.toUpperCase() +
         ": " +
         data.minimum_atom_count +
-        " atoms in a minimum.",
+        (data.minimum_atom_count === 1
+          ? " atom in a minimum."
+          : " atoms in a minimum."),
       "04 / EXACT SUBSET ATLAS",
     );
   s.append(
