@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Inspect query provenance polynomials, repeated evidence and exact possible-world probabilities."
+    />
+    <title>ProvLab - one fact is not two chances</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="wordmark" href="https://github.com/midya8/provlab"
+          >PROV<span>LAB</span></a
+        ><span class="tag">FINITE DATA / EXACT EVIDENCE</span>
+      </header>
+      <section class="hero">
+        <p class="eyebrow">01 / SYMBOLIC DATA REASONING</p>
+        <h1>One fact.<br />Not two <i>chances.</i></h1>
+        <p class="lead">
+          A self-join can use the same fact twice. Its polynomial remembers both
+          uses. Its probability must remember that they are
+          <strong>the same event.</strong>
+        </p>
+        <p class="scope">
+          Positive finite queries · natural polynomials · independent base-tuple
+          events
+        </p>
+      </section>
+      <section class="workbench">
+        <div class="bench-head">
+          <div>
+            <p class="eyebrow">02 / CHANGE THE ASSUMPTION</p>
+            <h2>A tiny database. Every world.</h2>
+          </div>
+          <label
+            >Control<select id="control" aria-label="Example control"></select
+          ></label>
+        </div>
+        <p id="why" class="why"></p>
+        <div class="split">
+          <div>
+            <h3>Supplied base tuples</h3>
+            <div class="scroll">
+              <table id="facts">
+                <thead>
+                  <tr>
+                    <th>Token</th>
+                    <th>Relation / values</th>
+                    <th>Bag m</th>
+                    <th>P(event)</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="small">
+              Bag multiplicity and event probability are separate inputs, not
+              conversions.
+            </p>
+          </div>
+          <div class="query-box">
+            <span class="eyebrow">UNION-ALL QUERY</span>
+            <pre id="query"></pre>
+            <p>
+              Tagged variables unify; constants stay fixed. Duplicate branches
+              retain multiplicity.
+            </p>
+          </div>
+        </div>
+        <details id="editor">
+          <summary>Edit the bounded query / database</summary>
+          <label for="input">Strict JSON request</label
+          ><textarea id="input" spellcheck="false"></textarea
+          ><button id="run">Run exact query</button>
+          <p class="small">
+            Up to6 tokens,4 values,4 union-all branches and3 atoms per branch.
+            No SQL parsing, recursion or negation.
+          </p>
+        </details>
+        <p id="status" role="status"></p>
+      </section>
+      <section id="results"></section>
+      <section class="method">
+        <p class="eyebrow">05 / CHECK THE CLAIM</p>
+        <h2>Evidence, not independent-sounding arithmetic.</h2>
+        <div class="method-grid">
+          <p>
+            The generator builds joins one atom at a time. The separate native
+            checker enumerates active-domain valuations and re-queries each
+            possible database, then uses Shannon recursion to replay exact
+            probabilities.
+          </p>
+          <p>
+            SQLite checks actual joins and expanded bag copies. SymPy checks
+            polynomial expansion. They are optional development references, not
+            code or services this page depends on.
+          </p>
+        </div>
+        <details>
+          <summary>Scope and limits</summary>
+          <ul id="limits"></ul>
+        </details>
+        <div class="links">
+          <a
+            id="download"
+            role="button"
+            download="provlab-certificate.json"
+            aria-disabled="true"
+            >Download replayable certificate</a
+          ><a href="https://github.com/midya8/provlab">Source</a
+          ><a href="https://github.com/midya8/provlab/blob/main/METHOD.md"
+            >Method & sources</a
+          >
+        </div>
+        <p class="small">
+          Local computation only. No uploads, tracking, paid API or external
+          inference. Bounded educational implementation, not a scalable database
+          or a guarantee about an AI system.
+        </p>
+      </section>
+      <footer>
+        PROVLAB / <span>HOW A TUPLE HAPPENED ≠ HOW LIKELY IT IS</span>
+      </footer>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

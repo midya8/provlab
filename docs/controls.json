@@ -1,0 +1,847 @@
+[
+  {
+    "id": "reuse",
+    "title": "Reused is not independent",
+    "why": "The same base token is used twice in one derivation. Its polynomial keeps p\u00b2, but its Boolean event is still p. Presence probability is 1/2, not the ordinary polynomial substitution 3/8. Bag multiplicity at p=2, q=3 is 10.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "q",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 3,
+              "probability": "1/4"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "duplicate-branches",
+    "title": "Same answers, different multiplicity",
+    "why": "Repeating a union-all branch doubles how-provenance and bag multiplicity. It does not turn the same existence event into two independent chances.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "overlap",
+    "title": "Two routes can share one fact",
+    "why": "The two witnesses share p. Their events overlap; adding the route probabilities double-counts the world containing all three facts.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "q",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            }
+          ]
+        },
+        {
+          "name": "T",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "r",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "T",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "disjoint-tokens",
+    "title": "Independent routes still overlap as events",
+    "why": "Two distinct independent input events can both occur. The probability of their union is not the sum of their probabilities. Distinct witness sets need not be mutually exclusive.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "q",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 3,
+              "probability": "1/4"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "projection",
+    "title": "Projection preserves alternative derivations",
+    "why": "Two source rows project to the same output. The polynomial records both tokens, and each possible world shows whether at least one survives.",
+    "input": {
+      "relations": [
+        {
+          "name": "Edge",
+          "arity": 2,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy",
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "q",
+              "values": [
+                "amy",
+                "cy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/3"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "Edge",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "join-chain",
+    "title": "A shared variable is a real join constraint",
+    "why": "Only compatible intermediate values join. A Cartesian product would invent unsupported output pairs. Repeated output pairs still collect every valid route.",
+    "input": {
+      "relations": [
+        {
+          "name": "Edge",
+          "arity": 2,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy",
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "q",
+              "values": [
+                "bob",
+                "cy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            },
+            {
+              "id": "r",
+              "values": [
+                "amy",
+                "cy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/3"
+            },
+            {
+              "id": "s",
+              "values": [
+                "cy",
+                "cy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/4"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x",
+          "z"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "Edge",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            },
+            {
+              "relation": "Edge",
+              "terms": [
+                {
+                  "var": "y"
+                },
+                {
+                  "var": "z"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "repeated-variable",
+    "title": "One variable cannot take two values in one atom",
+    "why": "Edge(x,x) selects only diagonal rows. A variable repeated within an atom is an equality constraint, not a fresh wildcard.",
+    "input": {
+      "relations": [
+        {
+          "name": "Edge",
+          "arity": 2,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy",
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "q",
+              "values": [
+                "amy",
+                "bob"
+              ],
+              "multiplicity": 2,
+              "probability": "1/3"
+            },
+            {
+              "id": "r",
+              "values": [
+                "bob",
+                "bob"
+              ],
+              "multiplicity": 3,
+              "probability": "1"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "Edge",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "constant-filter",
+    "title": "Constants and variable names are different terms",
+    "why": "The literal bob is fixed by a const term. A var term named bob would range over the active domain. Tagged terms avoid silently changing the query.",
+    "input": {
+      "relations": [
+        {
+          "name": "Edge",
+          "arity": 2,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy",
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "q",
+              "values": [
+                "amy",
+                "cy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "r",
+              "values": [
+                "cy",
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "0"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "Edge",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "const": "bob"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "empty-answer",
+    "title": "A missing witness gives no result tuple",
+    "why": "The join requires a shared value, but no shared value exists. The empty result is explicit, not a zero-probability answer invented by projection.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "q",
+              "values": [
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "boolean-head",
+    "title": "Existence can have an empty output tuple",
+    "why": "A safe Boolean query has a zero-column head. Its unit tuple () collects every matching binding. An empty head is not an empty conjunction.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "1/2"
+            },
+            {
+              "id": "q",
+              "values": [
+                "bob"
+              ],
+              "multiplicity": 1,
+              "probability": "1/3"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "zero-multiplicity",
+    "title": "Bag zero is not probabilistic impossibility",
+    "why": "Multiplicity0 and probability 1/2 describe separate interpretations. The bag answer has multiplicity 0 while its possible-world existence probability is 1/2. Neither field overwrites the other.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 0,
+              "probability": "1/2"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "zero-one-worlds",
+    "title": "Impossible worlds remain in the certificate",
+    "why": "Base probabilities 0 and 1 give some worlds zero mass, but all four masks remain visible. Symbolic derivability, positive world mass and answer probability are separate facts.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "0"
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "q",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 1,
+              "probability": "1"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "triple-reuse",
+    "title": "Three uses still describe one event",
+    "why": "A triple self-join preserves p\u00b3 in how-provenance and p-multiplicity cubed in bag semantics. Existence still asks whether p is present just once.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": [
+            {
+              "id": "p",
+              "values": [
+                "amy"
+              ],
+              "multiplicity": 2,
+              "probability": "1/2"
+            }
+          ]
+        }
+      ],
+      "query": {
+        "head": [
+          "x"
+        ],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "empty-relation",
+    "title": "A declared relation can have no tuples",
+    "why": "There are no active values or derivations. The single empty possible database is implicit in the input, while no output tuple is fabricated for the failed Boolean query.",
+    "input": {
+      "relations": [
+        {
+          "name": "R",
+          "arity": 1,
+          "rows": []
+        }
+      ],
+      "query": {
+        "head": [],
+        "branches": [
+          [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  }
+]

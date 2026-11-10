@@ -1,0 +1,75 @@
+{
+  "relations": [
+    {
+      "name": "R",
+      "arity": 1,
+      "rows": [
+        {
+          "id": "p",
+          "values": [
+            "amy"
+          ],
+          "multiplicity": 2,
+          "probability": "1/2"
+        }
+      ]
+    },
+    {
+      "name": "S",
+      "arity": 1,
+      "rows": [
+        {
+          "id": "q",
+          "values": [
+            "amy"
+          ],
+          "multiplicity": 3,
+          "probability": "1/4"
+        }
+      ]
+    }
+  ],
+  "query": {
+    "head": [
+      "x"
+    ],
+    "branches": [
+      [
+        {
+          "relation": "R",
+          "terms": [
+            {
+              "var": "x"
+            }
+          ]
+        },
+        {
+          "relation": "R",
+          "terms": [
+            {
+              "var": "x"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "relation": "R",
+          "terms": [
+            {
+              "var": "x"
+            }
+          ]
+        },
+        {
+          "relation": "S",
+          "terms": [
+            {
+              "var": "x"
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}
