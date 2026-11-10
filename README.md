@@ -69,3 +69,9 @@ Original project code and tiny fixtures under MIT. Classical semantics are credi
 [Live containment lab](https://midya8.github.io/provlab/containment.html) · [Exact contract and reproduction](CONTAINMENT.md)
 
 Compare safe single conjunctive queries in both directions with reverse homomorphisms, full canonical counterexamples, and every atom-subset minimum. Set equivalence is explicitly contrasted with bag counts and natural provenance. The0.1 data-provenance engine remains separate. See the method for exact bounds, classical sources and finite reference checks.
+
+## ProvLab0.3: the assumptions change the answer
+
+A separate finite [full-rule/key chase workbench](https://midya8.github.io/provlab/chase.html) adds constraint-relative containment, a complete fact/merge trace, ordered-head substitution, valid saturated counterexamples and explicitly labeled literal-clash vacuity. It tests every dependency subset and distinguishes inclusion-minimal supports from minimum-cardinality supports. The default needs both a key and a diagonal full rule; neither alone proves the rewrite. A separate control has a one-rule minimum support and a two-rule inclusion-minimal support.
+
+[Method and checks](CHASE.md) · [Default input](examples/chase-default.json) · [Independent replay](provlab/chase_verify.py). No existential rules, arbitrary EGDs, SQL NULL, bag-preserving optimization or global constrained query-minimization claim. Earlier provenance and unconstrained-containment modules remain available.

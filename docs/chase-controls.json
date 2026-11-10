@@ -1,0 +1,1432 @@
+[
+  {
+    "name": "Two assumptions, one rewrite",
+    "why": "A key merges the two output values. A full rule then supplies the diagonal S fact. Neither assumption alone proves the left-to-right rewrite.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        },
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "t"
+                },
+                {
+                  "var": "u"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        },
+        {
+          "name": "symmetry",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "u"
+                },
+                {
+                  "var": "v"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "v"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "No constraints",
+    "why": "The unchased database is a valid counterexample only when no extra constraints are selected.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": []
+    }
+  },
+  {
+    "name": "Only the key",
+    "why": "The output values merge, but no S fact is forced. Equality alone is not the whole proof.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Only the full rule",
+    "why": "Diagonal S facts appear, but the two output values need not be equal.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "t"
+                },
+                {
+                  "var": "u"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Literal clash is vacuity",
+    "why": "Distinct literal constants cannot merge. This target query has no answers on any database satisfying its key; a vacuous implication is labeled, not sold as a nonempty rewrite.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "const": "b"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Output becomes a literal",
+    "why": "A key can identify a mergeable output symbol with a fixed literal. It must substitute in the output tuple too.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "const": "b"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        },
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "t"
+                },
+                {
+                  "var": "u"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Boolean output",
+    "why": "An empty output tuple asks whether the pattern exists. It is not a fabricated tuple when the source query fails.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "range",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "y"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Recursive but finite",
+    "why": "Full transitivity can add shortcuts without inventing symbols. This bounded chase is finite even with a recursive predicate.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "z"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "y"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "transitive",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            },
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "y"
+                },
+                {
+                  "var": "z"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "New fact activates a key",
+    "why": "A full rule supplies a second R row. Only then does the key force equality; the order is visible in the trace.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "copy",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        },
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Names are not identities",
+    "why": "The variable named a starts as n:a, distinct from the rigid literal c:a. A key may later merge them, but spelling alone cannot.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["a"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "var": "a"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["x"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ground facts, empty binding",
+    "why": "A rule whose body and head are constant-only has one empty variable binding. Literal constants are never fresh existential witnesses.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "const": "a"
+              },
+              {
+                "const": "b"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "const": "b"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "ground",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "const": "a"
+                },
+                {
+                  "const": "b"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "const": "b"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "A composite key is not a unary key",
+    "why": "Key positions[0,1] identify an entire binary row, so two distinct rows need not merge.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "whole_row",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0, 1]
+        },
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Minimal is not minimum",
+    "why": "The direct rule alone suffices. The key plus diagonal rule is also inclusion-minimal, but it is not a smallest-cardinality support.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": ["x", "y"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": ["u", "v"],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          },
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "t"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "v"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        },
+        {
+          "name": "diagonal",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "t"
+                },
+                {
+                  "var": "u"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        },
+        {
+          "name": "direct",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "x"
+                }
+              ]
+            },
+            {
+              "relation": "R",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "x"
+              },
+              {
+                "var": "y"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "A rule forces a literal clash",
+    "why": "The initial facts do not violate the key. A full rule first adds a conflicting literal row; the resulting key clash proves target unsatisfiability.",
+    "input": {
+      "schema": [
+        {
+          "name": "R",
+          "arity": 2
+        },
+        {
+          "name": "S",
+          "arity": 2
+        }
+      ],
+      "left": {
+        "head": [],
+        "body": [
+          {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "const": "a"
+              }
+            ]
+          },
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "var": "x"
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "head": [],
+        "body": [
+          {
+            "relation": "S",
+            "terms": [
+              {
+                "var": "u"
+              },
+              {
+                "var": "u"
+              }
+            ]
+          }
+        ]
+      },
+      "dependencies": [
+        {
+          "name": "force_b",
+          "kind": "full",
+          "body": [
+            {
+              "relation": "S",
+              "terms": [
+                {
+                  "var": "k"
+                },
+                {
+                  "var": "x"
+                }
+              ]
+            }
+          ],
+          "head": {
+            "relation": "R",
+            "terms": [
+              {
+                "var": "k"
+              },
+              {
+                "const": "b"
+              }
+            ]
+          }
+        },
+        {
+          "name": "one_value",
+          "kind": "key",
+          "relation": "R",
+          "positions": [0]
+        }
+      ]
+    }
+  }
+]

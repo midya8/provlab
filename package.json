@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs tests/test_containment_engine.mjs tests/test_containment_browser.cjs"
+    "test": "node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs tests/test_containment_engine.mjs tests/test_containment_browser.cjs tests/test_chase_engine.mjs tests/test_chase_browser.cjs"
   }
 }
