@@ -170,6 +170,17 @@ class ProvLabTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify(r)
 
+    def test_prototype_like_identifiers(self):
+        for v in ["constructor", "toString", "__proto__", "hasOwnProperty"]:
+            r = model(
+                [R("constructor", 1, [("toString", ["__proto__"], 1, "1/2")])],
+                [v],
+                [[A("constructor", V(v))]],
+            )
+            out = analyze(r)
+            self.assertTrue(verify(out))
+            self.assertEqual(out["outputs"][0]["tuple"], ["__proto__"])
+
     def test_constant_only_and_ternary(self):
         r = model(
             [
