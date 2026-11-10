@@ -56,7 +56,7 @@ All arithmetic is exact: Python `Fraction`, browser `BigInt` rational arithmetic
 
 ## Validation
 
-The20 native tests include64 exhaustive two-value binary-relation/query-pattern cases,150 seeded queries, direct possible-world re-querying, a probability grid, multiplicity substitutions, all93 non-input primitive mutations of the default report, type/shape rejection, constant-only/ternary queries, four-variable bodies and six-token/64-world checks. The browser/native parity test compares164 full reports,233 outputs and6310 output/world records. Actual Chrome tests run all14 controls at1280,390 and320px, select every output and world, verify visible tables, reject invalid edits and complete14 trusted certificate downloads. Counts describe the committed fixtures, not a general proof.
+The21 native tests include64 exhaustive two-value binary-relation/query-pattern cases,150 seeded queries, direct possible-world re-querying, a probability grid, multiplicity substitutions, all93 non-input primitive mutations of the default report, type/shape rejection, constant-only/ternary queries, four-variable bodies and six-token/64-world checks and prototype-like identifiers. The browser/native parity test compares164 full reports,233 outputs and6310 output/world records. Actual Chrome tests run all14 controls at1280,390 and320px, select every output and world, verify visible tables, reject invalid edits and complete14 trusted certificate downloads. Counts describe the committed fixtures, not a general proof.
 
 CI runs native tests and installed-wheel checks on Python3.10/3.11/3.12/3.13, actual Chrome/browser parity checks and optional external references. Pages deployment is separate from test CI and must finish before any live-demo release claim.
 
