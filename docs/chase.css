@@ -1,0 +1,117 @@
+.head-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 35px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  background: var(--soft);
+  padding: 20px;
+  margin: 20px 0;
+}
+.head-flow pre {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.arrow {
+  font-size: 26px;
+}
+.event {
+  padding: 15px 18px;
+  border-left: 3px solid var(--green);
+  background: var(--soft);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+.query-box {
+  margin-bottom: 15px;
+}
+#facts table,
+#aliases table {
+  min-width: 260px;
+}
+#subset {
+  margin: 9px 0;
+  max-width: 100%;
+  width: 100%;
+}
+#step {
+  margin-top: 8px;
+  width: 100%;
+}
+h3 {
+  margin-top: 22px;
+}
+#editor {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 380px;
+  font:
+    12px/1.6 ui-monospace,
+    monospace;
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+details {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+td {
+  overflow-wrap: anywhere;
+}
+.certificate {
+  cursor: pointer;
+}
+#atlas .selected {
+  background: var(--soft);
+  font-weight: 600;
+}
+#source-answers,
+#target-answers {
+  line-height: 1.8;
+}
+#limits {
+  font-size: 13px;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+#limits li {
+  margin: 10px 0;
+}
+@media (max-width: 650px) {
+  .head-flow {
+    gap: 5px;
+    padding: 13px;
+    grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
+  }
+  .head-flow pre {
+    font-size: 14px;
+  }
+  .head-flow .eyebrow {
+    font-size: 9px;
+  }
+  .arrow {
+    font-size: 20px;
+  }
+  .hero h1 {
+    font-size: 53px;
+  }
+  .event {
+    padding: 12px;
+  }
+  .workbench {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+@media (max-width: 650px) {
+  .hero h1 {
+    font-size: clamp(37px, 10.7vw, 53px);
+    letter-spacing: -2px;
+  }
+}
