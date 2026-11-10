@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="A finite full-rule/key chase with quotient output tuples, constrained CQ containment, valid counterexamples and exact dependency supports."
+    />
+    <title>ProvLab - the assumptions change the answer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="containment.css" />
+    <link rel="stylesheet" href="chase.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="wordmark" href="index.html">PROV<span>LAB</span></a
+        ><span class="tag">QUERY REWRITES / CONSTRAINTS</span>
+      </header>
+      <section class="hero">
+        <p class="eyebrow">03 / SYMBOLIC QUERY REASONING</p>
+        <h1>The assumptions<br />change the <i>answer.</i></h1>
+        <p class="lead">
+          A rewrite that fails in general can work under a key and a rule. Watch
+          the database grow, see output values merge, and find which assumptions
+          actually carry the proof.
+        </p>
+        <p class="scope">Full rules · relational keys · finite set semantics</p>
+      </section>
+      <section class="workbench">
+        <div class="bench-head">
+          <div>
+            <p class="eyebrow">01 / MAKE THE ASSUMPTIONS EXPLICIT</p>
+            <h2>Two queries. A different contract.</h2>
+          </div>
+          <label
+            >Control<select id="control" aria-label="Chase control"></select
+          ></label>
+        </div>
+        <p id="why" class="why"></p>
+        <div class="split">
+          <div class="query-box">
+            <span class="eyebrow">LEFT QUERY</span>
+            <pre id="left-query"></pre>
+          </div>
+          <div class="query-box">
+            <span class="eyebrow">RIGHT QUERY</span>
+            <pre id="right-query"></pre>
+          </div>
+        </div>
+        <div class="query-box">
+          <span class="eyebrow">AVAILABLE DEPENDENCIES</span>
+          <pre id="dependencies"></pre>
+        </div>
+        <label
+          >Selected assumptions<select
+            id="subset"
+            aria-label="Dependency subset"
+          ></select
+        ></label>
+        <div class="direction-tabs">
+          <button id="lr" aria-pressed="true">Left ⊆Σ right</button
+          ><button id="rl" aria-pressed="false">Right ⊆Σ left</button>
+        </div>
+        <div id="verdict" class="verdict" aria-live="polite"></div>
+        <div class="evidence-block">
+          <p class="eyebrow">02 / REPLAY THE CHASE</p>
+          <h2>Facts change. The head changes too.</h2>
+          <p>
+            n:name is a mergeable query symbol, even in an output position.
+            c:name is a fixed literal. A key must substitute in both the facts
+            and the ordered output tuple.
+          </p>
+          <label
+            >Trace state<select
+              id="step"
+              aria-label="Chase trace state"
+            ></select
+          ></label>
+          <p id="event" class="event"></p>
+          <div class="head-flow">
+            <div>
+              <span class="eyebrow">INITIAL HEAD</span>
+              <pre id="initial-head"></pre>
+            </div>
+            <span class="arrow" aria-hidden="true">→</span>
+            <div>
+              <span class="eyebrow">SELECTED HEAD</span>
+              <pre id="current-head"></pre>
+            </div>
+          </div>
+          <div class="split">
+            <div>
+              <h3>Database at this step</h3>
+              <div class="scroll" id="facts"></div>
+            </div>
+            <div>
+              <h3>Symbol quotient</h3>
+              <div class="scroll" id="aliases"></div>
+            </div>
+          </div>
+          <p id="domain" class="map-note"></p>
+        </div>
+        <div class="evidence-block">
+          <p class="eyebrow">03 / VALIDATE THE TERMINAL DATABASE</p>
+          <h2>A counterexample must obey the rules.</h2>
+          <p id="terminal-note"></p>
+          <div id="checks" class="scroll"></div>
+          <div class="split">
+            <div>
+              <h3>Source query answers</h3>
+              <pre id="source-answers"></pre>
+            </div>
+            <div>
+              <h3>Target query answers</h3>
+              <pre id="target-answers"></pre>
+            </div>
+          </div>
+          <p id="witness" class="event"></p>
+          <div id="derivations" class="scroll"></div>
+        </div>
+        <div class="evidence-block">
+          <p class="eyebrow">04 / TEST EVERY ASSUMPTION SUBSET</p>
+          <h2>Smallest is not the same as minimal.</h2>
+          <p>
+            Every subset is tested, including no assumptions. An
+            inclusion-minimal support has no successful proper subset. A minimum
+            support uses the fewest dependencies. A vacuous support is labeled
+            as such.
+          </p>
+          <div id="atlas" class="scroll"></div>
+        </div>
+        <details>
+          <summary>Edit the bounded JSON input</summary>
+          <p>
+            Changes stay in this browser. This is not a SQL parser. Rule-head
+            variables must already occur in the rule body.
+          </p>
+          <textarea
+            id="editor"
+            aria-label="Chase JSON input"
+            spellcheck="false"
+          ></textarea
+          ><button id="run">Check this input</button>
+        </details>
+        <p id="status" role="status"></p>
+        <button id="download" class="certificate">
+          Download selected-assumptions certificate
+        </button>
+      </section>
+      <section class="method">
+        <p class="eyebrow">THE METHOD / NOT A GENERAL CHASE SOLVER</p>
+        <h2>Finite by construction.</h2>
+        <div class="method-grid">
+          <div>
+            <h3>No invented witnesses</h3>
+            <p>
+              Full rules add facts over existing symbols. Keys quotient symbols;
+              two different literal constants cause failure. The bounded domain
+              has at most five symbols and 75 possible facts.
+            </p>
+          </div>
+          <div>
+            <h3>Vacuity is not a rewrite victory</h3>
+            <p>
+              A literal clash means this target query is unsatisfiable under the
+              selected assumptions. Its containment holds vacuously. It does not
+              mean every database or the dependency set is inconsistent.
+            </p>
+          </div>
+        </div>
+        <ul id="limits"></ul>
+        <p>
+          The independent Python checker uses Cartesian grounding and flat
+          substitution, without importing the generator. The reference suite
+          tests query answers and dependency violations using actual SQLite.
+        </p>
+        <p>
+          <a href="https://github.com/midya8/provlab/blob/main/CHASE.md"
+            >Method and reproducible checks</a
+          >
+          · <a href="containment.html">Unconstrained containment</a> ·
+          <a href="https://github.com/midya8/provlab">Source</a>
+        </p>
+        <p class="source-note">
+          Classical database theory, implemented in a narrow, inspectable form.
+          <a href="https://webdam.di.ens.fr/Alice/pdfs/Chapter-8.pdf"
+            >Foundations of Databases, chapter 8</a
+          >
+          applies equality substitutions to the output tuple as well as the
+          body.
+          <a
+            href="https://iccl.inf.tu-dresden.de/w/images/9/9f/DBT2019-Lecture-18-print.pdf"
+            >Full dependency chase</a
+          >
+          adds no fresh symbols. No existential rules, arbitrary EGDs, SQL NULL,
+          bag guarantee, or global query minimization.
+        </p>
+      </section>
+      <footer>PROVLAB / LOCAL REASONING. INSPECTABLE EVIDENCE.</footer>
+    </main>
+    <script type="module" src="chase-app.js"></script>
+  </body>
+</html>
