@@ -71,9 +71,12 @@ test(
       (d) => (diagnostics = (diagnostics + d).slice(-4000)),
     );
     try {
+      // Hosted runners can take over 30 seconds to start Chrome. Wait for
+      // the debugger file, still bounded by 60 seconds and the live process.
+      // This changes no page, certificate, download or geometry assertion.
       for (
         let i = 0;
-        i < 1200 &&
+        i < 2400 &&
         !startupError &&
         browser.exitCode === null &&
         !fs.existsSync(path.join(profile, "DevToolsActivePort"));
